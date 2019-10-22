@@ -7,7 +7,7 @@
 bind ` send-prefix
 set -g prefix `
 unbind C-b
-# `-r 重新加载配置
+# ` + r 重新加载配置
 bind r source-file ~/.tmux.conf \; display "Reloaded!"
 # 把 window 和 pane 的初始序号改为 1 
 set-option -g base-index 1
@@ -38,14 +38,15 @@ bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "pbcopy"
 ```bash
 # 加入 ~/.zshrc
 alias tan1="tmux a -d -t 1 || tmux new -s 1"
-# 解释: 如果 attach session 1 成功, 那么就 attach, 并且从其他地方 dettach. 如果不存在 session 1, 那么新建一个 session 1
+# 解释:
+## 如果 attach session 1 成功, 那么就 attach, 并且从其他地方 dettach. 如果不存在 session 1, 那么新建一个 session 1
 ```
 
 ## 远程登陆直接启动tmux
 
 ```bash
 ssh -qt user@ip zsh -ci tan1
-## 解释
+## 解释:
 ## ssh 到 远程服务器, 执行 zsh 下面的 alias tan1, 一步到位的运行 tmux. 
 ```
 
@@ -54,7 +55,10 @@ ssh -qt user@ip zsh -ci tan1
 - ` + \ or - 创建左右分割 和 上下分割的 pane, 可以创建无限个
 - ` + 方向键, 在不同的 pane 里面切换
 - ` + c , 创建一个 window, 相当于linux里面的虚拟桌面.
-- \` + 数字, 在不同的 window 切换,  \` + n or p, 切换到上一个下一个 window
+- \` + 数字, 在不同的 window 切换,  \` + n or p, 切换到下一个和上一个 window
 - ` + d dettach, 相当于退出 tmux, 下次直接运行 tan1 可以随时 attach, 任务都还在
-- tmux kill-server 自杀模式, 杀死所有 tmux 进程
 - ` + r 重新加载配置
+- tmux kill-server 自杀模式, 杀死所有 tmux 进程
+- tmux ls 列出 session
+- tmux lsw 列出 window
+- tmux lsp 列出 window 里面的 pane 
