@@ -5,3 +5,4 @@ List of contents:
 
 - [tmux](tmux.md)
 - [zsh](zsh.md)
+- [wireguard](wg.md)
