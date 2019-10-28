@@ -27,7 +27,7 @@ mypubip () {
         curl -sL ${source_two}
 
     elif curl -sL ${source_three} | grep value= | cut -d '"' -f6 | grep -E -q ${valid_ip_opts} ; then
-        curl -sL ${source_three} | grep value= | cut -d '"' -f6 | grep -E ${valid_ip_opts}
+        curl -sL ${source_three} | grep value= | cut -d '"' -f6
 
     else
         echo 'not able to get my public ip'
@@ -64,7 +64,7 @@ elif curl -sL ${source_two} | grep -E -q ${valid_ip_opts} ; then
     china_ip=$(curl -sL ${source_two})
 
 elif curl -sL ${source_three} | grep value= | cut -d '"' -f6 | grep -E -q ${valid_ip_opts} ; then
-    china_ip=$(curl -sL ${source_three} | grep value= | cut -d '"' -f6 | grep -E ${valid_ip_opts})
+    china_ip=$(curl -sL ${source_three} | grep value= | cut -d '"' -f6)
 
 else
     echo 'not able to get my public ip'
