@@ -40,7 +40,7 @@ mypubip () {
 
 ## Afraid.org DDNS 更新脚本
 
-`cat /root/ddns.sh`
+`cat /root/bin/ddns.sh`
 
 > 脚本内容
 
