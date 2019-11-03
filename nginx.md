@@ -43,11 +43,6 @@ http {
     add_header Strict-Transport-Security "max-age=63072000" always;
     add_header X-Frame-Options SAMEORIGIN;
     add_header X-Content-Type-Options nosniff;
-    add_header X-XSS-Protection "1; mode=block";
-    add_header X-Robots-Tag none;
-    add_header X-Download-Options noopen;
-    add_header X-Permitted-Cross-Domain-Policies none;
-    add_header Referrer-Policy no-referrer;
 
     # log
     access_log /var/log/nginx/access.log;
@@ -79,13 +74,8 @@ server {
     # location
     location = /ray {
         proxy_http_version 1.1;
-        proxy_set_header Host $http_host;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_redirect          off;
-        proxy_buffering         off;
         proxy_pass              http://127.0.0.1:11111;
     }	
 }
