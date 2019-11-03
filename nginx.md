@@ -115,5 +115,7 @@ Ciphersuites = TLS_AES_128_GCM_SHA256:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_256_G
 # CipherString 设置 tls 1.2 顺序
 # Ciphersuites 设置 tls 1.3 顺序
 
+systemctl restart nginx
+
 ```
 
