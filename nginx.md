@@ -37,7 +37,7 @@ http {
     gzip_vary on;                   # 启用 gzip 压缩标识 "Vary: Accept-Encoding"
     gzip_disable "MSIE [1-6]\.";    # 禁用 IE6 以下的 gzip 压缩功能
     # 要压缩的 MIME 文件类型，text/html 默认添加了，因此不能再指定 text/html
-    gzip_types text/html text/xml text/rtf text/plain text/css text/javascript application/javascript application/ecmascript application/xml application/json image/gif image/svg+xml;
+    gzip_types text/xml text/rtf text/plain text/css text/javascript application/javascript application/ecmascript application/xml application/json image/gif image/svg+xml;
 
     # ssl 
     ssl_protocols TLSv1.2 TLSv1.3;
