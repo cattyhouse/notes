@@ -28,16 +28,16 @@ http {
     server_tokens off;
     resolver 1.1.1.1;
     resolver_timeout 10s;
-    
+
     ## GZIP 压缩配置
     gzip on;                        # 开启 gzip 压缩功能
-    gzip_min_length 1k;             # 允许进行压缩的最小字节数
+    gzip_min_length 100;             # 允许进行压缩的最小字节数
     gzip_comp_level 6;              # 压缩比(1-9)，级别越高占用 cpu 资源越多
     gzip_proxied any;               # 无条件压缩后端服务器返回的结果
     gzip_vary on;                   # 启用 gzip 压缩标识 "Vary: Accept-Encoding"
     gzip_disable "MSIE [1-6]\.";    # 禁用 IE6 以下的 gzip 压缩功能
     # 要压缩的 MIME 文件类型，text/html 默认添加了，因此不能再指定 text/html
-    gzip_types text/plain text/css text/javascript application/javascript application/x-javascript application/xml application/x-httpd-php image/jpeg image/png image/gif image/svg+xml font/ttf font/otf;
+    gzip_types text/html text/xml text/rtf text/plain text/css text/javascript application/javascript application/ecmascript application/xml application/json image/gif image/svg+xml;
 
     # ssl 
     ssl_protocols TLSv1.2 TLSv1.3;
