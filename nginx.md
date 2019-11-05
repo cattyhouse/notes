@@ -105,17 +105,17 @@ server {
 ```bash
 openssl version -a | grep OPENSSLDIR # 获取路径
 vim /usr/lib/ssl/openssl.cnf
-# 添加相应的位置
+# 行首插入, 如果没有 openssl_conf 字段的话
+openssl_conf = default_conf
+# 行尾插入, 如果没有 default_conf, ssl_sect, system_default_sect 字段的话
+[default_conf]
+ssl_conf = ssl_sect
+[ssl_sect]
+system_default = system_default_sect
 [system_default_sect]
-MinProtocol = TLSv1.2
-CipherString = DEFAULT@SECLEVEL=2
-# 上面是默认的, 下面是我们要添加的
+## 如果有以上字段, 只需插入最下面这一行
 Ciphersuites = TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256
 
-# CipherString 设置 tls 1.2 顺序
-# Ciphersuites 设置 tls 1.3 顺序
-
 systemctl restart nginx
-
 ```
 
