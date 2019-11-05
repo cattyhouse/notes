@@ -110,7 +110,7 @@ vim /usr/lib/ssl/openssl.cnf
 MinProtocol = TLSv1.2
 CipherString = DEFAULT@SECLEVEL=2
 # 上面是默认的, 下面是我们要添加的
-Ciphersuites = TLS_AES_128_GCM_SHA256:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_256_GCM_SHA384
+Ciphersuites = TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256
 
 # CipherString 设置 tls 1.2 顺序
 # Ciphersuites 设置 tls 1.3 顺序
