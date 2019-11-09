@@ -39,6 +39,7 @@ Address = 10.100.0.1/24
 # 每接受一个连接都不保存配置
 SaveConfig = false
 # 服务器监听的端口
+# 注意 wireguard 只用 UDP 端口
 ListenPort = 55555
 PrivateKey = 服务器的 Server-privatekey 里面的内容填入这里
 # 开启自动网络地址转换, eth0 更换成对应的出口网卡地址, ip a 可以查看网卡名称
@@ -89,7 +90,7 @@ systemctl enable wg-quick@wg0.service
     1. `Endpoint`: 填入服务器的公网 ip (或者域名)和端口, `example.com:55555`
     1. `Allow IPs`: 这里的意思是允许哪些 ip 走 VPN 连接到服务器, 这里填 `0.0.0.0/0`, 表示所有都走 VPN
     1. `Persistent Keekalive`: 间隔多久检查一下连接状况, 这里填 `25` 就可以了, 代表 `25` 秒检查一次
-    1. `ON-DEMAND ACTIVATION`, 这里把 `Wi-Fi` 和 `Cellular` 都选上, 表示任何网络下随时随地都连 `VPN`, 支持网络切换自动重连
+    1. `ON-DEMAND ACTIVATION`, 这里 `Wi-Fi` 和 `Cellular` 都关闭
 1. 所有设置好了之后, 点连接, 便可以看到详细的连接信息
 
 ### 测试
