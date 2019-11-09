@@ -36,8 +36,8 @@ vim wg0.conf # 编辑内容
 [Interface]
 # 设置 server 的 VPN IP 地址, 注意这个 **不是** 你的 server 的公网 ip, 可以自己定义
 Address = 10.100.0.1/24
-# 每接受一个连接都保存下配置
-SaveConfig = true
+# 每接受一个连接都不保存配置
+SaveConfig = false
 # 服务器监听的端口
 ListenPort = 55555
 PrivateKey = 服务器的 Server-privatekey 里面的内容填入这里
