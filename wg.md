@@ -42,8 +42,8 @@ SaveConfig = true
 ListenPort = 55555
 PrivateKey = 服务器的 Server-privatekey 里面的内容填入这里
 # 开启自动网络地址转换, eth0 更换成对应的出口网卡地址, ip a 可以查看网卡名称
-PostUp = iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-PostDown = iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+PostUp = iptables -t nat -I POSTROUTING -s 10.100.0.0/24 -o eth0 -j MASQUERADE
+PostDown = iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o eth0 -j MASQUERADE
 
 # 下面是定义客户端如何与服务器互联
 
