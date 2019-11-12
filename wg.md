@@ -109,8 +109,8 @@ systemctl enable wg-quick@wg0.service
     ```bash
     [Interface]
     PrivateKey = 生成的 Client-privatekey 的内容填入这里
-    Address = 10.10.0.9/32
-    DNS = 10.10.0.1
+    Address = 10.100.0.9/32
+    DNS = 10.100.0.1
 
     [Peer]
     PublicKey = 前面生成的 Server-publickey 的内容填入这里
