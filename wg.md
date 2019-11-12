@@ -49,8 +49,8 @@ PostDown = iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o eth0 -j MASQUERADE
 # 下面是定义客户端如何与服务器互联
 
 [Peer]
-# 客户端的公匙, 以 iOS 为例, 打开 iOS wireguard 客户端, 点右上角的 + , 然后 create from scratch
-# 点 generate keypair, 将生成的 Public key 复制, 填入这里
+# 客户端的公匙, 以 iOS 为例, 打开 iOS wireguard 客户端, 点右上角的 + , 然后 create from scratch, 点 generate keypair, 将生成的 Public key 复制, 填入这里
+# 或者用配置文件的方法, 填入 Client-publickey 的内容
 PublicKey = xxxxx
 PresharedKey = 前面定义好的 presharedkey 内容填入这里
 # 定义客户端的 ip 地址, 可以随便写, 只要跟服务端的 VPN IP 在同一个网段
@@ -73,7 +73,7 @@ systemctl enable wg-quick@wg0.service
 
 # 客户端
 
-> 以 iOS 客户端为例
+## 以 iOS 客户端为例
 
 1. 打开 `App Store`, 搜索 `wireguard`, 下载
 1. 点击客户端右上角的 +, `Create from scratch`
@@ -87,11 +87,41 @@ systemctl enable wg-quick@wg0.service
     1. 然后点 `Add Peer`
     1. `Public Key`: 把服务器那边生成的 `Server-publickey` 的内容填到这里
     1. `Preshared key`: 把服务器那边生成的 `presharedkey` 的内容填到这里
-    1. `Endpoint`: 填入服务器的公网 ip (或者域名)和端口, `example.com:55555`
+    1. `Endpoint`: 填入服务器的公网 ip (或者域名)和端口, 比如 `example.com:55555`
     1. `Allow IPs`: 这里的意思是允许哪些 ip 走 VPN 连接到服务器, 这里填 `0.0.0.0/0`, 表示所有都走 VPN
     1. `Persistent Keekalive`: 间隔多久检查一下连接状况, 这里填 `25` 就可以了, 代表 `25` 秒检查一次
     1. `ON-DEMAND ACTIVATION`, 这里 `Wi-Fi` 和 `Cellular` 都关闭
 1. 所有设置好了之后, 点连接, 便可以看到详细的连接信息
+
+## 用配置文件的方法
+
+> 适合所有客户端设备, 比如 iOS, macOS, Android, Windows, Linux
+
+1. 生成客户端的 Key 
+    ```bash
+    wg genkey | tee Client-privatekey | wg pubkey > Client-publickey
+    # 查看内容
+    cat Client-privatekey Client-publickey
+    ```
+1. 生成配置文件
+    > vim client.conf
+
+    ```bash
+    [Interface]
+    PrivateKey = 生成的 Client-privatekey 的内容填入这里
+    Address = 10.10.0.9/32
+    DNS = 10.10.0.1
+
+    [Peer]
+    PublicKey = 前面生成的 Server-publickey 的内容填入这里
+    PresharedKey = 前面生成的 presharedkey 的内容填入这里
+    AllowedIPs = 0.0.0.0/0
+    Endpoint = 服务器域名或者ip:服务器端口 # 比如 example.com:55555
+    ```
+1. 把 client.conf 发送给客户端
+    1. iOS/macOS 可以通过 wireguard 客户端导入 client.conf
+    1. linux 下面把 client.conf 复制到 /etc/wireguard/, 然后 `systemctl start wg-quick@client.service`
+    1. windows 下面可以直接用客户端打开 client.conf
 
 ### 测试
 
