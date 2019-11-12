@@ -123,7 +123,7 @@ systemctl enable wg-quick@wg0.service
     1. linux 下面把 client.conf 复制到 /etc/wireguard/, 然后 `systemctl start wg-quick@client.service`
     1. windows 下面可以直接用客户端打开 client.conf
 
-### 测试
+# 测试
 
 1. 去服务端 `ping 10.100.0.9`, 看是否通
 1. 用 `iPhone` 的 `Safari` 分别打开国内和国外网站, 看是否通.
