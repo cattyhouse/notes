@@ -8,3 +8,4 @@ List of contents:
 - [wireguard](wg.md) wg 简略步骤
 - [shell](shell.md) 一些常用的 shell 脚本
 - [nginx](nginx.md) nginx 的配置
+- [ssh](ssh.md) ssh 的配置
