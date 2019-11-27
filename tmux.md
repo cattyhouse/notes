@@ -37,11 +37,11 @@ bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "pbcopy"
 
 ```bash
 # 加入 ~/.zshrc
-alias tan1="tmux a -d -t 1 2>/dev/null || { sleep 0.5 ; tmux new -s 1 }"
+alias tan1="tmux new -A -D -s 1"
 # 解释:
 ## 如果存在 session 1, 那么就 attach, 并且 dettach 掉其他窗口的 session
-## 如果不存在 session 1, 肯定会 attach 失败, 那么把错误信息 redirect 到黑洞 (2>/dev/null), 2代表错误信息的输出
-## 接下来等待 0.5s, 然后新建一个 session 1. 
+## 如果不存在 session 1, 就新建一个 session 1. 
+## man tmux search new-session, find out what -A -D means
 ```
 
 ## 远程登陆直接启动tmux
