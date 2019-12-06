@@ -3,6 +3,7 @@
 除了常规插件之外的设置
 
 ```bash
+## setopt 和 unsetopt 自动忽略大小写和下滑线
 # 禁用命令纠正提示
 unsetopt correct
 # Redirect 的时候, 不显示前一个命令的输出
@@ -14,8 +15,10 @@ setopt clobber
 # 保存命令日期
 setopt EXTENDED_HISTORY
 # 保存命令到 history 文件
-setopt SHARE_HISTORY
-# 显示所有历史命令的 function
+setopt APPEND_HISTORY
+# 执行的时候就保存
+setopt INC_APPEND_HISTORY
+# 显示所有历史命令, 包含时间
 h() {
 fc -li 1
 }
