@@ -18,6 +18,7 @@ events {
 
 # http
 http {
+    default_type application/octet-stream; # 不在 mime.types 里面的文件以二进制处理
     sendfile on;
     charset utf-8;
     types_hash_max_size 4096;
@@ -102,9 +103,16 @@ server {
     #proxy_buffering         off;
 
     # location
-    location = /path {
+    location  /path {
         proxy_pass              http://127.0.0.1:11111;
-    }	
+    }
+
+    location /kernel {
+        # 文件服务器, 会访问 /var/www/html/kernel 下面的文件
+        autoindex on; # 索引
+        autoindex_exact_size off; # 显示文件大小
+        autoindex_localtime on; # 显示文件时间
+  }	
 }
 server {
     listen 80;
