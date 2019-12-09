@@ -18,6 +18,8 @@ events {
 
 # http
 http {
+    limit_req_zone $binary_remote_addr zone=mylimit:10m rate=2r/s; # rate limit 设置限制, 可以在 server, location 下面启用限制
+    # refer: https://www.nginx.com/blog/rate-limiting-nginx/
     default_type application/octet-stream; # 不在 mime.types 里面的文件以二进制处理
     sendfile on;
     charset utf-8;
@@ -108,11 +110,23 @@ server {
     }
 
     location /kernel {
-        # 文件服务器, 会访问 /var/www/html/kernel 下面的文件
+        limit_req zone=mylimit; # 启用限制
+        # 文件服务器, 打开 example.com/kernel 会访问 /var/www/html/kernel 下面的文件
         autoindex on; # 索引
         autoindex_exact_size off; # 显示文件大小
         autoindex_localtime on; # 显示文件时间
-  }	
+    }
+    location / {
+        # 网站镜像
+        # 此时 root /var/www/html; 的内容不会再显示
+        limit_req zone=mylimit; # 启用限制
+		sub_filter mirror_domain.tld example.com;
+		sub_filter_once off;
+        sub_filter_types *;
+		proxy_set_header Referer http://mirror_domain.tld;
+		proxy_set_header Host mirror_domain.tld;
+		proxy_pass http://mirror_domain.tld;
+    }
 }
 server {
     listen 80;
