@@ -166,7 +166,17 @@ systemctl restart nginx
 
 ```bash
 # 获取免费的证书
+# standalone 方法, 运行前不能有 80 端口监听
 certbot certonly -d example.com --standalone --agree-tos -m email_address
+# webroot 方法, 必须有 80 端口监听, 以 nginx 为例, server block 里面必须有这句话:
+location ^~ /.well-known/acme-challenge/ {
+    root /var/www;
+}
+location = /.well-known/acme-challenge/ {
+    return 404;
+}
+# webroot 的方法虽然不用暂停 nginx, 但是需要在证书更新后, reload nginx 以及其他加载证书的服务.
+# 从方便性角度讲, --standalone 是最方便的.
 ```
 
 ```bash
@@ -174,7 +184,7 @@ certbot certonly -d example.com --standalone --agree-tos -m email_address
 vim /etc/letsencrypt/cli.ini
 # 内容
 max-log-backups = 0
-pre-hook = systemctl stop nginx.service # 更新前停止 nginx, 因为certbot需要临时监听 80
+pre-hook = systemctl stop nginx.service # 更新前停止 nginx, 因为 certbot --standalone 模式需要临时监听 80
 post-hook = systemctl start nginx.service # 更新后启动 nginx
 ```
 
