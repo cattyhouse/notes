@@ -120,12 +120,12 @@ server {
         # 网站镜像
         # 此时 root /var/www/html; 的内容不会再显示
         limit_req zone=mylimit; # 启用限制
-		sub_filter mirror_domain.tld example.com;
-		sub_filter_once off;
+        sub_filter mirror_domain.tld example.com;
+        sub_filter_once off;
         sub_filter_types *;
-		proxy_set_header Referer http://mirror_domain.tld;
-		proxy_set_header Host mirror_domain.tld;
-		proxy_pass http://mirror_domain.tld;
+        proxy_set_header Referer http://mirror_domain.tld;
+        proxy_set_header Host mirror_domain.tld;
+        proxy_pass http://mirror_domain.tld;
     }
 }
 server {
