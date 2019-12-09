@@ -162,3 +162,23 @@ Ciphersuites = TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY13
 systemctl restart nginx
 ```
 
+## Certbot 证书
+
+```bash
+# 获取免费的证书
+certbot certonly -d example.com --standalone --agree-tos -m email_address
+```
+
+```bash
+# 设置证书更新的时候的 hook
+vim /etc/letsencrypt/cli.ini
+# 内容
+max-log-backups = 0
+pre-hook = systemctl stop nginx.service # 更新前停止 nginx, 因为certbot需要临时监听 80
+post-hook = systemctl start nginx.service # 更新后启动 nginx
+```
+
+```
+# 确保 证书更新的 timer 已经启用
+systemctl is-enabled certbot.timer | grep -q enabled && echo 'yes' || echo 'please run: systemctl enable certbot.timer'
+```
