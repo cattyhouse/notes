@@ -67,6 +67,7 @@ http {
     add_header X-Download-Options noopen;
     add_header X-Permitted-Cross-Domain-Policies none;
     add_header Referrer-Policy no-referrer;
+    add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive"; # 禁止搜索引擎
     # log
     #access_log /var/log/nginx/access.log;
     access_log off;
