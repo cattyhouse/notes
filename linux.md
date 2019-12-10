@@ -12,17 +12,17 @@ useradd -r -s /usr/bin/nologin username # archlinux
 # 创建三无用户, 无 home, 无密码, 无 login
 # 这样的用户有什么用呢? 用来运行一些程序, 提高安全性.
 
-useradd -Ds username
-# 修改用户的 shell
+useradd -D -s /bin/zsh username
+# 更新用户 shell
 
-userdel -fr username
+userdel -rf username
 # -f 强制删除用户, 即使是登陆状态
 # -r 删除 /home/ 下面的用户文件夹
 
 passwd username
 # 修改用户密码
 
-passwd -dl username 
+passwd -d -l username 
 # -d 设置密码为空, -l 禁止修改密码, 同时禁止此用户密码登陆
 
 passwd -u username
