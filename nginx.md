@@ -115,7 +115,7 @@ server {
     # 先精确匹配，没有则查找带有 ^~的前缀匹配，没有则进行正则匹配，最后才返回前缀匹配的结果（如果有的话）
     # refer：https://juejin.im/post/5ce5e1f65188254159084141
 
-    # nginx文档中, the longest matching prefix 指的是 ~ 和 ~* 比 空白 prefix 长, 空白 prefix 是指这样的: location /path {}
+    # nginx文档中, the longest matching prefix 是指 location /path—longer {} 比 location /path {} 长, 所以优先匹配
 
     location = /path {
         # = 表示精确匹配, 匹配完毕, 立即执行, 不再继续匹配
