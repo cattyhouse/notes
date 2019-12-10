@@ -106,7 +106,8 @@ server {
     #proxy_buffering         off;
 
     # location
-    location  /path {
+    location = /path {
+        # = 表示精确匹配, 匹配完毕, 立即执行, 不再继续匹配
         proxy_pass              http://127.0.0.1:11111;
     }
 
@@ -176,7 +177,7 @@ location ^~ /.well-known/acme-challenge/ {
 location = /.well-known/acme-challenge/ {
     return 404;
 }
-# webroot 的方法虽然不用暂停 nginx, 但是需要在证书更新后, reload nginx 以及其他加载证书的服务.
+# webroot 的方法虽然不用暂停 nginx, 但是需要在证书更新后, 需要 reload nginx 以及其他使用此证书的服务.
 # 从方便性角度讲, --standalone 是最方便的.
 ```
 
