@@ -106,6 +106,17 @@ server {
     #proxy_buffering         off;
 
     # location
+    # 当有多条 location 规则时，nginx 有一套比较复杂的规则，优先级如下：
+    # 精确匹配 =
+    # 前缀匹配 ^~（立刻停止后续的正则搜索）
+    # 按文件中顺序的正则匹配 ~或~*
+    # 匹配不带任何修饰的前缀匹配。
+    # 这个规则大体的思路是
+    # 先精确匹配，没有则查找带有 ^~的前缀匹配，没有则进行正则匹配，最后才返回前缀匹配的结果（如果有的话）
+    # refer：https://juejin.im/post/5ce5e1f65188254159084141
+
+    # nginx文档中, the longest matching prefix 指的是 ~ 和 ~* 比 空白 prefix 长, 空白 prefix 是指这样的: location /path {}
+
     location = /path {
         # = 表示精确匹配, 匹配完毕, 立即执行, 不再继续匹配
         proxy_pass              http://127.0.0.1:11111;
