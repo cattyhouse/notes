@@ -51,3 +51,9 @@ Hostname example2.com
 User root
 Port 22
 ```
+
+# 让ssh安静点
+
+`touch ~/.hushlogin` 
+
+[参考](https://debian-administration.org/article/546/Giving_yourself_a_quieter_SSH_login)
