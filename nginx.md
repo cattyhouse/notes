@@ -150,7 +150,7 @@ server {
 
 ```bash
 # 建立软连接
-sudo mkdir -p /etc/nginx/{site-available,sites-enabled}
+sudo mkdir -p /etc/nginx/{sites-available,sites-enabled}
 ln -sf /etc/nginx/site-available/example.com /etc/nginx/sites-enabled/example.com
 ```
 
