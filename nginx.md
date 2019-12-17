@@ -28,8 +28,8 @@ http {
     client_max_body_size 0;
     client_body_buffer_size 128k;
     server_tokens off;
-    resolver 1.1.1.1 1.0.0.1;
-    resolver_timeout 10s;
+    resolver 1.1.1.1 1.0.0.1 valid=30s;
+    resolver_timeout 30s;
 
     ## adddtional
     aio on;
@@ -123,22 +123,28 @@ server {
     }
 
     location /kernel {
-        limit_req zone=mylimit; # 启用限制
+        #limit_req zone=mylimit; # 启用限制
         # 文件服务器, 打开 example.com/kernel 会访问 /var/www/html/kernel 下面的文件
         autoindex on; # 索引
-        autoindex_exact_size off; # 显示文件大小
+        autoindex_exact_size off; # 易读性显示文件大小
         autoindex_localtime on; # 显示文件时间
     }
     location / {
         # 网站镜像
         # 此时 root /var/www/html; 的内容不会再显示
-        limit_req zone=mylimit; # 启用限制
-        sub_filter mirror_domain.tld example.com;
+        #limit_req zone=mylimit; # 启用限制
+        set $upstream_server http://mirror_domain.tld;
+        set $upstream_domain mirror_domain.tld;
+        # use variable to avoid resoling failure that leads to start nginx failure
+        # refer: https://sandro-keil.de/blog/let-nginx-start-if-upstream-host-is-unavailable-or-down/
+        
         sub_filter_once off;
         sub_filter_types *;
-        proxy_set_header Referer http://mirror_domain.tld;
-        proxy_set_header Host mirror_domain.tld;
-        proxy_pass http://mirror_domain.tld;
+
+        sub_filter $upstream_domain example.com;
+        proxy_set_header Referer $upstream_server;
+        proxy_set_header Host $upstream_domain;
+        proxy_pass $upstream_server;
     }
 }
 server {
