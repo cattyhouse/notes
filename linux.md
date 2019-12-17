@@ -36,3 +36,16 @@ passwd -aS
 cat /etc/passwd | grep -Ev 'nologin|false'
 # 查询系统中有 shell 的用户
 ```
+
+## Debian Buster 
+
+### DNS
+
+```bash
+# Buster 默认用的 dhcpclient, 自定义 DNS 需要编辑
+vim /etc/dhcp/dhclient.conf
+# 添加
+prepend domain-name-servers 1.1.1.1, 1.0.0.1;
+# 然后重启 ? 貌似只有重启生效...
+reboot
+```
