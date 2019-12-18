@@ -4,6 +4,7 @@
 # main
 worker_processes auto;
 worker_cpu_affinity auto;
+worker_priority -10;
 worker_rlimit_nofile 400000;
 #pid /run/nginx.pid;
 # include
@@ -85,7 +86,8 @@ server {
     root /var/www/html;
     index index.html index.htm;
     server_name example.com;
-    listen 443 ssl http2 reuseport;
+    listen 443 ssl http2 reuseport default_server;
+    # default_server 保证访问纯ip的时候也可以打开网站
     # certs
     ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem; # managed by Certbot
     ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem; # managed by Certbot
@@ -148,7 +150,8 @@ server {
     }
 }
 server {
-    listen 80;
+    listen 80 default_server;
+    # default_server 保证访问纯ip的时候也可以打开网站
     server_name example.com;
     return 301 https://example.com$request_uri;
 }
@@ -157,7 +160,7 @@ server {
 ```bash
 # 建立软连接
 sudo mkdir -p /etc/nginx/{sites-available,sites-enabled}
-ln -sf /etc/nginx/site-available/example.com /etc/nginx/sites-enabled/example.com
+ln -sf /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/example.com
 ```
 
 ## TLS1.3 优先级
