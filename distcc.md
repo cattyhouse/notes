@@ -90,8 +90,8 @@ WantedBy=multi-user.target
 ```bash
 # 启动服务
 
-sudo systemctl start distcc8.service
-sudo systemctl enable distcc8.service
+sudo systemctl start distccd8.service
+sudo systemctl enable distccd8.service
 
 ```
 
