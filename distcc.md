@@ -29,12 +29,7 @@ BUILDENV=(distcc color !ccache check !sign)
 
 DISTCC_ARGS="--allow 192.168.11.12 --log-level error --jobs 10"
 ```
-```bash
-# 启动服务
 
-systemctl start distcc.service
-systemctl enable distcc.service
-```
 ```bash
 # 建立软连接
 
@@ -43,6 +38,12 @@ ln -s /usr/bin/distcc /usr/lib/distcc/aarch64-unknown-linux-gnu-c++
 ln -s /usr/bin/distcc /usr/lib/distcc/aarch64-unknown-linux-gnu-cc
 ln -s /usr/bin/distcc /usr/lib/distcc/aarch64-unknown-linux-gnu-cpp
 ln -s /usr/bin/distcc /usr/lib/distcc/aarch64-unknown-linux-gnu-g++
+```
+```bash
+# 启动服务
+
+systemctl start distcc.service
+systemctl enable distcc.service
 ```
 
 ## 副编译机 x86_64 虚拟机设置:
