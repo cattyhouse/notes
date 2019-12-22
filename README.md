@@ -9,5 +9,6 @@
 - [shell](shell.md) 一些常用的 shell 脚本
 - [nginx](nginx.md) nginx 的配置
 - [ssh](ssh.md) ssh 的配置
+- [distcc](distcc.md) archlinux 系统 distcc 正确使用方式
 - [trial](trial.md) 无限期试用 macOS 上的 app
 
