@@ -42,8 +42,8 @@ ln -s /usr/bin/distcc /usr/lib/distcc/aarch64-unknown-linux-gnu-g++
 ```bash
 # 启动服务
 
-systemctl start distcc.service
-systemctl enable distcc.service
+systemctl start distccd.service
+systemctl enable distccd.service
 ```
 
 ## 副编译机 x86_64 虚拟机设置:
