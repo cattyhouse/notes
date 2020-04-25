@@ -34,11 +34,12 @@
     ````
     我跟你们开玩笑的, 这样显然不行
     ````
-- 正确的方式是, 等试用期快到了或者结束了, 彻底关闭 app, 然后直接删除这个文件
+- 正确的方式是, 等试用期快到了或者结束了, 彻底关闭 app, 然后~~直接删除这个文件~~
 
     ```bash
     # xxx 是你的用户名, 别傻傻的复制黏贴
-    rm /Users/xxx/Library/Preferences/com.bombich.ccc.plist
+    ~~rm /Users/xxx/Library/Preferences/com.bombich.ccc.plist~~
+	对于这个例子, 需要编辑这个plist文件, 删除条目 TrialStartDateV5, TrialExpirationV5
 
     ```
 - 然后这个文件会重新生成, 再打开看看, 是不是 `TrialStartDateV5` 更新了
