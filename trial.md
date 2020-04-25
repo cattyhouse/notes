@@ -38,8 +38,9 @@
 
     ```bash
     # xxx 是你的用户名, 别傻傻的复制黏贴
-    ~~rm /Users/xxx/Library/Preferences/com.bombich.ccc.plist~~
-	对于这个例子, 需要编辑这个plist文件, 删除条目 TrialStartDateV5, TrialExpirationV5
+    rm /Users/xxx/Library/Preferences/com.bombich.ccc.plist
+	
+    等等, 对于ccc这个例子, 需要编辑这个plist文件, 删除条目 TrialStartDateV5, TrialExpirationV5
 
     ```
 - 然后这个文件会重新生成, 再打开看看, 是不是 `TrialStartDateV5` 更新了
