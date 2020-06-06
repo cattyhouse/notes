@@ -11,4 +11,4 @@
 - [ssh](ssh.md) ssh 的配置
 - [distcc](distcc.md) archlinux 系统 distcc 正确使用方式
 - [trial](trial.md) 无限期试用 macOS 上的 app
-
+- [linux.backup.restore](linux.backup.restore.md) 备份还原linux
