@@ -50,6 +50,7 @@ systemctl start ssh
 ssh root@ip # 进入 arch iso
 # arch ios 里面
 fdisk /dev/sda
+# g 创建 gpt 格式
 # sda1 = 200M, EFI
 # sda2 = rest, Linux
 mkfs.vfat -F32 /dev/sda1
