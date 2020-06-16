@@ -15,23 +15,23 @@ sda
 ## 创建排除文件
 
 ```bash
-echo '
+cat <<-EOF | sudo tee /exclude.txt
 /tmp/*
 /mnt/*
 /proc/*
 /dev/*
 /sys/*
 /run/*
-' > /mnt/exclude.txt
+EOF 
 ```
 ## 备份所有文件
 
 ```bash
-tar \
---exclude-from=/mnt/exclude.txt \
--czpv \
+sudo tar \
+-X /exclude.txt \
+-capv \
 --xattrs \
--f /mnt/arch.tar.gz /
+-f /mnt/arch.tar.xz /
 ```
 ## 拷贝出来
 
@@ -59,11 +59,11 @@ mount /dev/sda2 /mnt
 mkdir -p /mnt/efi
 mount /dev/sda1 /mnt/efi
 # 从另外一台机器上
-scp ~/arch.tar.gz root@ip:/mnt
+scp ~/arch.tar.xz root@ip:/mnt
 # arch iso 里面
 cd /mnt
-tar -xvp --xattrs -f arch.tar.gz
-rm arch.tar.gz
+tar -xvp --xattrs -f arch.tar.xz
+rm arch.tar.xz
 genfstab -U /mnt > /mnt/etc/fstab
 arch-chroot /mnt /bin/bash
 grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB
